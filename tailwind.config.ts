@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        facebook: "#1877f2",
+        onyx: "#353839"
       },
     },
   },
