@@ -33,7 +33,6 @@ export default function RegisterFormComponent(): React.ReactNode{
                 },
                 body: JSON.stringify({...registerState})
             });
-            console.log(response);
             
             if(response.ok)
             {
@@ -72,7 +71,6 @@ export default function RegisterFormComponent(): React.ReactNode{
             <button 
             className="w-3/4 h-12 my-1 border-2 border-solid border-black flex items-center justify-center font-bold hover:bg-black hover:text-white"
             onClick={handleRegister}
-            type="button"
             >
                 Register
             </button>
