@@ -26,7 +26,7 @@ export default function RegisterFormComponent(): React.ReactNode{
     const handleRegister = async(e: React.MouseEvent) => {
         e.preventDefault();
         try{
-            const response = await fetch('/api/register',{
+            const response = await fetch('/api/auth/register',{
                 method: "POST",
                 headers:{
                     'Content-type': 'application/json'
@@ -72,10 +72,10 @@ export default function RegisterFormComponent(): React.ReactNode{
             className="w-3/4 h-12 my-1 border-2 border-solid border-black flex items-center justify-center font-bold hover:bg-black hover:text-white"
             onClick={handleRegister}
             >
-                Register
+                Register <span className="material-symbols-outlined mx-2">arrow_forward</span>
             </button>
 
-            <Link href='/login'>Already have an account? Login Now</Link>
+            <span>Already have an account? <Link href='/login'>Login Now</Link></span>
         </form>
     )
 }

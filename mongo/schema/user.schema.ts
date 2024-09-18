@@ -9,7 +9,8 @@ const userSchema = new Schema({
     password:
     {
         type: String,
-        required: [ true, "Requires password"]
+        required: [ true, "Requires password"],
+        select: false // By default doesnot get the password unless called upon
     },
     firstname: 
     {
@@ -24,12 +25,17 @@ const userSchema = new Schema({
     email: 
     {
         type: String,
-        required: [ true, "Requires email"]
+        required: [ true, "Requires email"],
+        unique: [true, "Email already exists"]
+    },
+    phone:
+    {
+        type: String
     },
     company: 
     {
-        type: String,
-        default: ""
+        type: Schema.Types.ObjectId,
+        ref: 'Company'
     },
     department: 
     {
@@ -48,6 +54,16 @@ const userSchema = new Schema({
     dateOfLeave:
     {
         type: Date
+    },
+    ID:
+    {
+        type: String,
+        unique: [true, "Employee ID already exists"]
+    },
+    isAdmin: 
+    {
+        type: Boolean,
+        default: false,
     }
 }, {
     timestamps: true
