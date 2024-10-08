@@ -61,9 +61,9 @@ const authOptions: NextAuthOptions = {
                 return {
                     ...token,
                     accessToken: account?.access_token,
-                    id: user.id,
-                    email: user.email,
-                    username: user?.username
+                    user: {
+                        ...user
+                    }
                 }
             }
 
@@ -76,6 +76,7 @@ const authOptions: NextAuthOptions = {
             // return Promise.resolve(session);
             return {
                 ...session,
+                accessToken: token.accessToken,
                 user: {
                     ...session.user,
                     username: token.uesrname,

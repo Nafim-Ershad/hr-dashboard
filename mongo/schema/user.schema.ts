@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+
 const userSchema = new Schema({
     username: 
     {
@@ -68,9 +69,22 @@ const userSchema = new Schema({
     verified: {
         type: Boolean,
         default: false
+    },
+    settings: {
+        lang: {
+            type: String,
+            enum: ['en', 'de', 'bn'],
+            default: 'en'
+        },
+        theme: {
+            type: String,
+            enum: ['light', 'dark'],
+            default: 'light',
+        }
     }
 }, {
     timestamps: true
 });
+
 
 export default userSchema;

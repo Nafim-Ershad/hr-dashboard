@@ -4,13 +4,13 @@
 import React, { ChangeEvent, useState } from "react";
 import InputComponent from "./Input.Component";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 // Assets
-import Google from '../assets/google.png';
-import Facebook from '../assets/facebook.png';
-import Link from "next/link";
+import Google from '@/public/assets/google.png';
+import Facebook from '@/public/assets/facebook.png';
 
 export default function LoginFormComponent(): React.ReactNode{
     const [ loginState, setLoginState ] = useState({

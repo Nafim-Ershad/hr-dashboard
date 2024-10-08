@@ -1,10 +1,13 @@
 'use client'
 
-import { createContext, useState } from 'react';
+import { createContext, useState, ReactNode } from 'react';
+
+// Providers
+import { UserProvider } from './UserProvider';
+import { UserSettingsProvider } from './UserSettingsProvider';
 
 type AppState = {
     navExtended: boolean,
-    theme: 'dark' | 'light',
     currentPage: 'dashboard' | 'employees' | 'company' | 'settings'
 }
 
@@ -15,7 +18,6 @@ interface ContextType{
 
 const initialState: AppState = {
     navExtended: false,
-    theme: 'dark',
     currentPage: 'dashboard'
 }
 
@@ -27,13 +29,17 @@ export const AppContext = createContext<ContextType>({
     setAppState: () => {}
 });
 
-export const AppProvider = ({ children }: { children: React.ReactNode }): React.ReactNode => {
+export const AppProvider = ({ children }: { children: ReactNode }): ReactNode => {
     const [ appState, setAppState ] = useState<AppState>({
         ...initialState
     })
     return(
         <AppContext.Provider value={{appState, setAppState}}>
-            { children }
+            <UserProvider>
+                <UserSettingsProvider>
+                    { children }
+                </UserSettingsProvider>
+            </UserProvider>
         </AppContext.Provider>
     )
 }

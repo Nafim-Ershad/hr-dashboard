@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import React from "react";
@@ -34,7 +35,7 @@ function NavigationBar(): React.ReactNode{
         >
             <div className="absolute left-full top-1/2 -translate-x-1/3 -translate-y-1/2 w-10 aspect-square flex items-center justify-center border border-solid border-black rounded-xl bg-white hover:cursor-pointer">
                 <span 
-                className="material-symbols-outlined w-full h-full flex items-center justify-center"
+                className="material-symbols-outlined w-full h-full flex items-center justify-center "
                 onClick={handleNavExtension}
                 >
                     { navExtended ? 'chevron_left' : 'chevron_right' }

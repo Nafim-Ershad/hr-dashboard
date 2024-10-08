@@ -21,3 +21,7 @@ export async function connectToDB(){
         console.log(err);
     }
 }
+
+export async function getUserbySession(){
+    console.log("sad")
+}
