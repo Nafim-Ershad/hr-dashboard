@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import InputComponent from "./Input.Component";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 // Assets
 import Google from '@/public/assets/google.png';
@@ -18,6 +18,7 @@ export default function LoginFormComponent(): React.ReactNode{
         password: ""
     });
     const router = useRouter();
+    const {data: session, status} = useSession();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -39,23 +40,29 @@ export default function LoginFormComponent(): React.ReactNode{
                 {   
                     throw new Error(`${response?.error}`);
                 }
-                
-                setLoginState({
-                    email: "",
-                    password: ""
-                });
-
-                router.push('/dashboard');
-                router.refresh();
             }
-
-            throw new Error("Please fillup both the email and password.")
+            else{
+                throw new Error("Please fillup both the email and password.")
+            }
         }
         catch(error)
         {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        if (status === 'authenticated' && session?.user?.id) {
+            console.log(session)
+            setLoginState({
+                email: "",
+                password: ""
+            });
+          // Redirect to dynamic dashboard path
+          router.push(`/dashboard/${session.user.id}`);
+        }
+        console.log(session);
+      }, [status, session, router]);
 
     return(
         <form className="w-full flex flex-col items-center justify-start">

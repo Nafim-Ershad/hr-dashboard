@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import InputComponent from "./Input.Component";
 
 // Assets
@@ -14,6 +15,7 @@ export default function RegisterFormComponent(): React.ReactNode{
         password: ""
     })
     const route = useRouter();
+    const { data:session, status } = useSession();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -43,6 +45,12 @@ export default function RegisterFormComponent(): React.ReactNode{
             console.log("Error Registering:\n", err)
         }
     }
+
+    useEffect(()=>{
+        if(status === 'authenticated' && session?.user?.id){
+            route.push(`/dashboard/${session.user.id}`)
+        }
+    }, [session, route, status]);
 
     return(
         <form className="w-full flex flex-col items-center justify-start">

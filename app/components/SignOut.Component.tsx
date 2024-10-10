@@ -12,7 +12,7 @@ function SignOutComponent(): React.ReactNode {
   return (
     <button 
     className={`${appState.navExtended ? "w-[90%]" : "w-12"} h-12 rounded-md flex items-center justify-center border border-solid border-black hover:bg-red-600 hover:text-white hover:border-white`}
-    onClick={() => signOut()}
+    onClick={() => signOut({ callbackUrl: '/login', redirect: true })}
     >
       {
         appState.navExtended ?

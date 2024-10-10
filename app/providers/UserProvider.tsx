@@ -2,7 +2,7 @@
 
 import { useState, createContext, ReactNode } from 'react';
 
-import { getUserbySession } from '@/mongo/db';
+import { getUserbyEmail } from '@/mongo/db';
 
 type UserType = {
     username: string
@@ -35,7 +35,7 @@ const UserContext = createContext<ContextType>({
 export function UserProvider({ children }: { children: ReactNode }): ReactNode{
     const [user, setUser] = useState<UserType | null>(initialState)
 
-    getUserbySession();  
+    getUserbyEmail();  
 
     return(
         <UserContext.Provider value={{user, setUser}} >

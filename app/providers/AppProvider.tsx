@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useState, ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
 
 // Providers
 import { UserProvider } from './UserProvider';
@@ -35,11 +36,13 @@ export const AppProvider = ({ children }: { children: ReactNode }): ReactNode =>
     })
     return(
         <AppContext.Provider value={{appState, setAppState}}>
-            <UserProvider>
-                <UserSettingsProvider>
-                    { children }
-                </UserSettingsProvider>
-            </UserProvider>
+            <SessionProvider>
+                <UserProvider>
+                    <UserSettingsProvider>
+                        { children }
+                    </UserSettingsProvider>
+                </UserProvider>
+            </SessionProvider>
         </AppContext.Provider>
     )
 }

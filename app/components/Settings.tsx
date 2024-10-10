@@ -1,34 +1,27 @@
 import { ReactNode } from "react";
-import { getServerSession } from "next-auth";
 
-async function Settings(): ReactNode{
-    const session = await getServerSession();
-
-    if(!session)
-    {
-        route
-    }
+async function Settings(): Promise<ReactNode>{
 
     return(
-        <ul className="w-[90%] h-fit flex flex-col items-center justify-start gap-4">
-            <li className="w-[50%] h-10 grid grid-cols-3 grid-rows-1 drop-shadow-md border-b-[1px] border-gray-500">
-                <span className="flex items-center justify-start">
+        <ul className="w-[95%] h-fit border border-gray-500 rounded-md flex flex-col itemsstart justify-start">
+            <li className="w-full h-12 grid grid-cols-2 grid-rows-1 border-b border-gray-500 hover:bg-gray-500/5">
+                <span className="px-8 flex items-center justify-start">
                     Language
                 </span>
-                <span className="col-span-2 flex items-center justify-end">
-                    <select name="language" className="w-28">
+                <span className="flex items-center justify-start">
+                    <select name="language" className="w-32 h-8">
                         <option value="en">English</option>
                         <option value="bn">Bangla</option>
                         <option value="de">German</option>
                     </select>
                 </span>
             </li>
-            <li className="w-[50%] h-10 grid grid-cols-3 grid-rows-1 drop-shadow-md border-b-[1px] border-gray-500">
-                <span className="flex items-center justify-start">
+            <li className="w-full h-12 grid grid-cols-2 grid-rows-1 border-gray-500 hover:bg-gray-500/5">
+                <span className="px-8 flex items-center justify-start">
                     Theme
                 </span>
-                <span className="col-span-2 flex items-center justify-end">
-                    <select name="theme" className="w-28">
+                <span className="flex items-center justify-start">
+                    <select name="theme" className="w-32 h-8">
                         <option value="light">Light</option>
                         <option value="dark">Dark</option>
                     </select>

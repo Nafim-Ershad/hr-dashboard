@@ -3,6 +3,7 @@
 
 import React from "react";
 import { useContext } from "react";
+import { useSession } from "next-auth/react";
 
 import SignOutComponent from "./SignOut.Component";
 
@@ -11,7 +12,10 @@ import Link from "next/link";
 
 function NavigationBar(): React.ReactNode{
     const { appState, setAppState } = useContext(AppContext);
+    const { data: session } = useSession();
     const { navExtended } = appState;
+
+    console.log("NavBar:", session);
 
     const handleNavExtension = (e: React.MouseEvent<HTMLDivElement>): void => {
         e.preventDefault();
@@ -56,7 +60,7 @@ function NavigationBar(): React.ReactNode{
                     appState.navExtended ?
                     <>
                         <Link
-                        href={'/dashboard'} 
+                        href={`/dashboard/${session?.user?.id}`} 
                         className={`w-full h-12 px-3 py-1 flex items-center justify-between border-2 border-solid border-transparent rounded-xl hover:border-black ${appState.currentPage === 'dashboard' ? "bg-black text-white border-none hover:border-none" : ""}`}
                         onClick={()=>handleLinkClick('dashboard')}
                         >
@@ -87,7 +91,7 @@ function NavigationBar(): React.ReactNode{
                             <span className="w-full h-full flex items-center justify-start text-md font-semibold">Company</span>
                         </Link>
                         <Link
-                        href={'/settings'} 
+                        href={`/settings/${session?.user?.id}`} 
                         className={`w-full h-12 px-3 py-1 flex items-center justify-between border-2 border-solid border-transparent rounded-xl hover:border-black ${appState.currentPage === 'settings' ? "bg-black text-white border-none hover:border-none" : ""}`}
                         onClick={()=>handleLinkClick('settings')}
                         >

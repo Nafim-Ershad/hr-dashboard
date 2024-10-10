@@ -22,6 +22,6 @@ export async function connectToDB(){
     }
 }
 
-export async function getUserbySession(){
-    console.log("sad")
+export async function getUserbyEmail(){
+    return ;
 }

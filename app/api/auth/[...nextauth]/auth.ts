@@ -44,7 +44,7 @@ const authOptions: NextAuthOptions = {
                         // console.log(user);
                         return user;
                     }
-                    throw new Error("Username or password doesn't match")
+                    throw new Error("Email or Password doesn't match")
                 }
                 throw new Error("No user found. Create an Account first");
             }catch(error)
@@ -61,30 +61,25 @@ const authOptions: NextAuthOptions = {
                 return {
                     ...token,
                     accessToken: account?.access_token,
-                    user: {
-                        ...user
-                    }
+                    email: user.email,
+                    id: user.id
                 }
             }
 
             return token;
         },
         async session({ session, token }){
-
-            // session.user = token.user;
-
-            // return Promise.resolve(session);
             return {
                 ...session,
                 accessToken: token.accessToken,
                 user: {
                     ...session.user,
-                    username: token.uesrname,
                     id: token.id,
                     email: token.email
                 }
             }
         }
+        
     }
 }
 
